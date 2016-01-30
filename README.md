@@ -18,6 +18,20 @@ Some functional types allows to easily handling errors and exceptions.
 
 *WIP*
 
+### Play with Optional
+
+```javascript
+Optional.ofNullable(42).filter((value) => {
+  return value == 42
+}).map((value) => {
+  console.log("-> ", value) // -> 42
+  return 69
+}).flatMap((value) => {
+  console.log("-> ", value) // -> 69
+  return Optional.of("YES!")
+}).toString() // Optional[YES!]
+```
+
 ### Divide and Either
 
 ```javascript
@@ -81,17 +95,19 @@ Then add a `.babelrc` file at the root of the project:
 
 Create a `app.js` file:
 
-    import {Optional, Result} from './dist/stairways.es6';
-        
-    console.log(Optional.ofNullable(42).orElseGet((val) => {
-      return 69;
-    }));
-     
-    Result.error(Error("Huston?")).either((val) => {
-      console.log("Either OK", val)
-    },(err) => {
-      console.log("Either KO", err)
-    });
+```javascript
+import {Optional, Result} from './dist/stairways.es6';
+    
+console.log(Optional.ofNullable(42).orElseGet((val) => {
+  return 69;
+}));
+ 
+Result.error(Error("Huston?")).either((val) => {
+  console.log("Either OK", val)
+},(err) => {
+  console.log("Either KO", err)
+});
+```
 
 You can run it like that: `babel-node app.js`
 
@@ -99,13 +115,15 @@ You can run it like that: `babel-node app.js`
 
 If you prefer run `app.js` with node, you have to write a little "hook",ie create a `hook.js` file:
 
-    #!/usr/bin/env node
-    
-    require("babel-register")({
-      presets: [
-        "es2015"
-      ] });
-    var app = require('./app');
+```javascript
+#!/usr/bin/env node
+
+require("babel-register")({
+  presets: [
+    "es2015"
+  ] });
+var app = require('./app');
+```
 
 Now, you can run it like that: `node hook.js`
 
@@ -120,41 +138,44 @@ Now, you can run it like that: `node hook.js`
 
 You just need to declare `stairways.es5.node`
 
-    var stairways = require("./lib/stairways.es5.node");
-    var Result = stairways.Result;
-    
-    
-    Result.ok(5).either(function(val) {
-      console.log("Either OK", val)
-    }, function(err) {
-      console.log("Either KO", err)
-    });
-    
+```javascript
+var stairways = require("./lib/stairways.es5.node");
+var Result = stairways.Result;
+
+
+Result.ok(5).either(function(val) {
+  console.log("Either OK", val)
+}, function(err) {
+  console.log("Either KO", err)
+});
+```
 
 #### with browser
 
 You just need to declare `stairways.es5.browser`:
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <script src="lib/stairways.es5.browser.js"></script>
-    </head>
-    <body>
-    
-    <script>
-      var Result = stairways.Result;
-    
-      Result.ok(5).either(function(val) {
-        console.log("Either OK", val)
-      }, function(err) {
-        console.log("Either KO", err)
-      });
-    
-    </script>
-    </body>
-    </html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="lib/stairways.es5.browser.js"></script>
+</head>
+<body>
+
+<script>
+  var Result = stairways.Result;
+
+  Result.ok(5).either(function(val) {
+    console.log("Either OK", val)
+  }, function(err) {
+    console.log("Either KO", err)
+  });
+
+</script>
+</body>
+</html>
+```
 
 ## Build
 
