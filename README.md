@@ -21,6 +21,8 @@ Some functional types allows to easily handling errors and exceptions.
 ### Play with Optional
 
 ```javascript
+import {Optional} from '/dist/stairways.es6';
+
 Optional.ofNullable(42).filter((value) => {
   return value == 42
 }).map((value) => {
