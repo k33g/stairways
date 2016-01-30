@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="lib/stairways.es5.browser.js"></script>
+</head>
+<body>
+
+<script>
+  var Result = stairways.Result;
+
+  console.log(
+    stairways.Optional.ofNullable(45)
+  );
+
+  Result.ok(5).either(function(val) {
+    console.log("Either OK", val)
+  }, function(err) {
+    console.log("Either KO", err)
+  });
+
+  Result.error(Error("Huston?")).either(function(val) {
+    console.log("Either OK", val)
+  },function(err) {
+    console.log("Either KO", err)
+  });
+</script>
+</body>
+</html>
