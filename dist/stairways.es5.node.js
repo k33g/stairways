@@ -1,6 +1,6 @@
 "use strict";
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -16,7 +16,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * Created by k33g_org on 29/01/16.
  */
 
-var ExtendableException = (function (_Error) {
+var ExtendableException = function (_Error) {
   _inherits(ExtendableException, _Error);
 
   function ExtendableException(message) {
@@ -31,9 +31,9 @@ var ExtendableException = (function (_Error) {
   }
 
   return ExtendableException;
-})(Error);
+}(Error);
 
-var NullPointerException = (function (_ExtendableException) {
+var NullPointerException = function (_ExtendableException) {
   _inherits(NullPointerException, _ExtendableException);
 
   function NullPointerException(message) {
@@ -43,9 +43,9 @@ var NullPointerException = (function (_ExtendableException) {
   }
 
   return NullPointerException;
-})(ExtendableException);
+}(ExtendableException);
 
-var NoSuchElementException = (function (_ExtendableException2) {
+var NoSuchElementException = function (_ExtendableException2) {
   _inherits(NoSuchElementException, _ExtendableException2);
 
   function NoSuchElementException(message) {
@@ -55,9 +55,9 @@ var NoSuchElementException = (function (_ExtendableException2) {
   }
 
   return NoSuchElementException;
-})(ExtendableException);
+}(ExtendableException);
 
-var RuntimeException = (function (_ExtendableException3) {
+var RuntimeException = function (_ExtendableException3) {
   _inherits(RuntimeException, _ExtendableException3);
 
   function RuntimeException(message) {
@@ -67,9 +67,9 @@ var RuntimeException = (function (_ExtendableException3) {
   }
 
   return RuntimeException;
-})(ExtendableException);
+}(ExtendableException);
 
-var Objects = (function () {
+var Objects = function () {
   function Objects() {
     _classCallCheck(this, Objects);
   }
@@ -93,7 +93,7 @@ var Objects = (function () {
   }]);
 
   return Objects;
-})();
+}();
 
 /*
  http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8-b132/java/util/Optional.java
@@ -104,7 +104,7 @@ var Objects = (function () {
 
  */
 
-var Optional = (function () {
+var Optional = function () {
   function Optional(value) {
     _classCallCheck(this, Optional);
 
@@ -257,9 +257,9 @@ var Optional = (function () {
   }]);
 
   return Optional;
-})();
+}();
 
-var Result = (function () {
+var Result = function () {
   function Result(value, throwable) {
     _classCallCheck(this, Result);
 
@@ -560,7 +560,7 @@ var Result = (function () {
   }]);
 
   return Result;
-})();
+}();
 
 exports.ExtendableException = ExtendableException;
 exports.NullPointerException = NullPointerException;
