@@ -1,7 +1,7 @@
 /**
  * Created by k33g_org on 30/01/16.
  */
-var stairways = require("./lib/stairways.es5.node");
+var stairways = require("./libs/stairways.es5.node");
 var Result = stairways.Result;
 
 

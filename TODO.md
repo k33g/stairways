@@ -1,0 +1,3 @@
+...
+
+- make a version with browser.js(babel) and system.js (use jspm) (for browser sample)
