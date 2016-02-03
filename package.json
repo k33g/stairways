@@ -6,12 +6,8 @@
   "author": "@k33g_org",
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "^6.4.5",
     "babel-preset-es2015": "^6.3.13",
-    "source-map-support": "^0.4.0"
-  },
-  "devDependencies": {
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0"
+    "source-map-support": "^0.4.0",
+    "babelify": "^7.2.0"
   }
 }

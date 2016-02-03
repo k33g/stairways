@@ -185,7 +185,10 @@ You just need to declare `stairways.es5.browser`:
 
 You must install first dependencies:
 
+    sudo npm install babel-cli -g
     sudo npm install -g rollup
+    sudo npm install -g browserify
+
     npm install
 
 ### Building stairways.js

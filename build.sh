@@ -9,6 +9,9 @@ babel dist/stairways.es2015.js --out-file dist/stairways.es5.node.js --source-ma
 # browser version
 browserify dist/stairways.es2015.js -t babelify --outfile dist/stairways.es5.browser.js --standalone stairways --source-maps
 
+# copy map
+cp dist/stairways.es5.node.js.map dist/stairways.es5.browser.js.map
+
 # copy for samples
 cp dist/stairways.es2015.js samples.es2015/libs/stairways.es2015.js
 
