@@ -8,11 +8,11 @@ The absence of data is often the result of errors that you should probably handl
 
 Some functional types allows to easily handling errors and exceptions.
 
-**StairWays** provides 2 new Types:
+**StairWays** provides 3 new Types:
 
 - `Optional` like the `Optional` of Java 8 [https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)
 - `Result` like the `Result` of Golo [http://golo-lang.org/documentation/next/javadoc/gololang/error/Result.html](http://golo-lang.org/documentation/next/javadoc/gololang/error/Result.html)
-
+- `Identity` like the `Identity` of Haskell
 
 ## CookBook
 
