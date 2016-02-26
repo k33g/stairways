@@ -82,8 +82,7 @@ export class Optional {
       return Optional.empty();
     } else {
       let res = Objects.requireNonNull(mapper.apply(null, [this["value"]]), "Result is null");
-
-
+      
       if(res instanceof Optional) {
         return res;
       } else {

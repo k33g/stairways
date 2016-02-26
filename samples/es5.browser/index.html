@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="lib/stairways.es5.browser.js"></script>
+  <script src="stairways.es5.browser.js"></script>
+
 </head>
 <body>
-
+<h1>Please, open your console :)</h1>
 <script>
+
+  console.log("Stairways version:", stairways.Version.number());
+
   var Result = stairways.Result;
+  var Optional = stairways.Optional;
 
   console.log(
-    stairways.Optional.ofNullable(45)
+    Optional.ofNullable(45)
   );
 
   Result.ok(5).either(function(val) {
