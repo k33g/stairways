@@ -468,6 +468,47 @@ class Result {
 }
 
 /**
+ * Created by k33g_org on 26/02/16.
+ */
+
+/**
+ * Classs representing Identity type
+ * 
+ * example:
+ * let compute = (a,b) => Identity.of(100)
+ *      .map(value => value + a)
+ *      .map(value => value * b)
+ *      .get();
+ * 
+ */
+class Identity {
+  
+  constructor(value) {
+    let private_value = value !== undefined ? value : null;
+    this.get = () => private_value;
+  }
+  
+  bind(callBack) {
+    return callBack(this.get());
+  }
+  
+  map(callBack) {
+    return new Identity(callBack(this.get()));
+  }
+
+  static of(value) {
+    return new Identity(value);
+  }
+
+  /**
+   * @override
+   */
+  toString() {
+    return `Identity.value[${this.get()}]`;
+  }
+}
+
+/**
  * Created by k33g_org on 04/02/16.
  */
 
@@ -477,4 +518,4 @@ class Version {
   }
 }
 
-export { ExtendableException, NullPointerException, NoSuchElementException, RuntimeException, Objects, Optional, Result, Version };
+export { ExtendableException, NullPointerException, NoSuchElementException, RuntimeException, Objects, Optional, Result, Identity, Version };
