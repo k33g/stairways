@@ -19,7 +19,7 @@ let opt3 = Optional.ofNullable(42);
 
 console.log("opt.isPresent", opt.isPresent())
 
-console.log(opt1, opt2, opt3)
+console.log(opt1.toString(), opt2.toString(), opt3.toString())
 
 console.log(opt3.get())
 console.log(opt.get())
@@ -30,8 +30,8 @@ opt3.isPresent((val) => {
 });
 
 
-console.log(opt2, "-->", opt2.isPresent())
-console.log(opt1, "-->", opt1.isPresent())
+console.log(opt2.toString(), "-->", opt2.isPresent())
+console.log(opt1.toString(), "-->", opt1.isPresent())
 
 
 opt2.isPresent((val) => {
@@ -41,21 +41,21 @@ opt2.isPresent((val) => {
 
 console.log("filter1", opt3.filter((val) => {
   return val < 5
-}))
+}).toString())
 
 console.log("filter2", opt3.filter((val) => {
   return val == 42
-}))
+}).toString())
 
 console.log(Objects.requireNonNull(5,"boum"))
 
 console.log("Mapper", opt3.map((val)=>{
   return val+=10;
-}));
+}).toString());
 
 console.log("FlatMapper", opt3.flatMap((val)=>{
   return Optional.of(val+100);
-}));
+}).toString());
 
 /*
 console.log("FlatMapper", opt3.flatMap((val)=>{
@@ -64,9 +64,9 @@ console.log("FlatMapper", opt3.flatMap((val)=>{
 */
 
 
-console.log(opt1, opt1.orElse(42))
-console.log(opt2, opt2.orElse(42))
-console.log(opt3, opt3.orElse(1000))
+console.log(opt1.toString(), opt1.orElse(42))
+console.log(opt2.toString(), opt2.orElse(42))
+console.log(opt3.toString(), opt3.orElse(1000))
 
 opt3.orElseGet((val) => {
   console.log("1", val)
