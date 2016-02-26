@@ -1,4 +1,4 @@
-import {Optional, Objects, Result } from './libs/stairways.es2015';
+import {Optional, Objects, Result } from './stairways.es2015';
 
 let opt = Optional.of(5)
 

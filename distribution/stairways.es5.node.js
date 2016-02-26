@@ -1,29 +1,69 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.stairways = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var babelHelpers = {};
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+babelHelpers.classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+babelHelpers.createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+babelHelpers.inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+babelHelpers.possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+babelHelpers;
 
 /**
  * Created by k33g_org on 29/01/16.
+ *
  */
 
 var ExtendableException = function (_Error) {
-  _inherits(ExtendableException, _Error);
+  babelHelpers.inherits(ExtendableException, _Error);
 
   function ExtendableException(message) {
-    _classCallCheck(this, ExtendableException);
+    babelHelpers.classCallCheck(this, ExtendableException);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ExtendableException).call(this, message));
+    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ExtendableException).call(this, message));
 
     _this.name = _this.constructor.name;
     _this.message = message;
@@ -35,36 +75,33 @@ var ExtendableException = function (_Error) {
 }(Error);
 
 var NullPointerException = function (_ExtendableException) {
-  _inherits(NullPointerException, _ExtendableException);
+  babelHelpers.inherits(NullPointerException, _ExtendableException);
 
   function NullPointerException(message) {
-    _classCallCheck(this, NullPointerException);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(NullPointerException).call(this, message));
+    babelHelpers.classCallCheck(this, NullPointerException);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(NullPointerException).call(this, message));
   }
 
   return NullPointerException;
 }(ExtendableException);
 
 var NoSuchElementException = function (_ExtendableException2) {
-  _inherits(NoSuchElementException, _ExtendableException2);
+  babelHelpers.inherits(NoSuchElementException, _ExtendableException2);
 
   function NoSuchElementException(message) {
-    _classCallCheck(this, NoSuchElementException);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(NoSuchElementException).call(this, message));
+    babelHelpers.classCallCheck(this, NoSuchElementException);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(NoSuchElementException).call(this, message));
   }
 
   return NoSuchElementException;
 }(ExtendableException);
 
 var RuntimeException = function (_ExtendableException3) {
-  _inherits(RuntimeException, _ExtendableException3);
+  babelHelpers.inherits(RuntimeException, _ExtendableException3);
 
   function RuntimeException(message) {
-    _classCallCheck(this, RuntimeException);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(RuntimeException).call(this, message));
+    babelHelpers.classCallCheck(this, RuntimeException);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(RuntimeException).call(this, message));
   }
 
   return RuntimeException;
@@ -72,10 +109,10 @@ var RuntimeException = function (_ExtendableException3) {
 
 var Objects = function () {
   function Objects() {
-    _classCallCheck(this, Objects);
+    babelHelpers.classCallCheck(this, Objects);
   }
 
-  _createClass(Objects, null, [{
+  babelHelpers.createClass(Objects, null, [{
     key: "requireNonNull",
     value: function requireNonNull(obj, message) {
       if (obj == null) {
@@ -92,7 +129,6 @@ var Objects = function () {
       return obj;
     }
   }]);
-
   return Objects;
 }();
 
@@ -107,7 +143,7 @@ var Objects = function () {
 
 var Optional = function () {
   function Optional(value) {
-    _classCallCheck(this, Optional);
+    babelHelpers.classCallCheck(this, Optional);
 
     this["value"] = value !== undefined ? value : null;
     if (value == null && value !== undefined) {
@@ -116,7 +152,7 @@ var Optional = function () {
     }
   }
 
-  _createClass(Optional, [{
+  babelHelpers.createClass(Optional, [{
     key: "get",
     value: function get() {
       if (this["value"] == null || undefined) {
@@ -256,20 +292,19 @@ var Optional = function () {
       return value == null || undefined ? Optional.empty() : Optional.of(value);
     }
   }]);
-
   return Optional;
 }();
 
 var Result = function () {
   function Result(value, throwable) {
-    _classCallCheck(this, Result);
+    babelHelpers.classCallCheck(this, Result);
 
     this["value"] = value !== undefined ? value : null;
     this["error"] = throwable !== undefined ? throwable : null;
     //this[empty] = new Result();
   }
 
-  _createClass(Result, [{
+  babelHelpers.createClass(Result, [{
     key: "get",
     value: function get() {
       if (this["value"] !== null || this["value"] !== undefined) {
@@ -559,8 +594,25 @@ var Result = function () {
       return Result.error(new RuntimeException(message));
     }
   }]);
-
   return Result;
+}();
+
+/**
+ * Created by k33g_org on 04/02/16.
+ */
+
+var Version = function () {
+  function Version() {
+    babelHelpers.classCallCheck(this, Version);
+  }
+
+  babelHelpers.createClass(Version, null, [{
+    key: "number",
+    value: function number() {
+      return [0, 0, 0];
+    }
+  }]);
+  return Version;
 }();
 
 exports.ExtendableException = ExtendableException;
@@ -570,6 +622,5 @@ exports.RuntimeException = RuntimeException;
 exports.Objects = Objects;
 exports.Optional = Optional;
 exports.Result = Result;
-
-},{}]},{},[1])(1)
-});
+exports.Version = Version;
+//# sourceMappingURL=stairways.es5.node.js.map

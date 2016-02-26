@@ -20,5 +20,4 @@ export class Objects {
     return obj;
   }
 
-
 }
