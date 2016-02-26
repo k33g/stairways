@@ -145,32 +145,49 @@ var Optional = function () {
   function Optional(value) {
     babelHelpers.classCallCheck(this, Optional);
 
-    this["value"] = value !== undefined ? value : null;
+    var private_value = value !== undefined ? value : null;
+
     if (value == null && value !== undefined) {
       // if undefined then null
       throw new NullPointerException("Null value");
     }
+
+    this.get = function () {
+      /*
+      if (private_value == null || undefined) {
+        throw new NoSuchElementException("No value present");
+      }
+      */
+      return private_value;
+    };
+    /*
+    this.getValue = () => { // with no Exception
+      return private_value;
+    }
+    */
   }
 
   babelHelpers.createClass(Optional, [{
-    key: "get",
-    value: function get() {
+    key: "isPresent",
+
+    /*
+    get() {
       if (this["value"] == null || undefined) {
         throw new NoSuchElementException("No value present");
       }
       return this["value"];
     }
-  }, {
-    key: "isPresent",
+    */
+
     value: function isPresent() {
       if (arguments.length != 0) {
-        if (!(this["value"] == null || this["value"] == undefined)) {
+        if (!(this.get() == null || this.get() == undefined)) {
           var consumer = arguments[0];
           Objects.requireNonNull(consumer, "Consumer is null");
-          consumer(this["value"]);
+          consumer(this.get());
         }
       } else {
-        return !(this["value"] == null || this["value"] == undefined);
+        return !(this.get() == null || this.get() == undefined);
       }
     }
   }, {
@@ -181,7 +198,7 @@ var Optional = function () {
         return this;
       } else {
         //return predicate(this["value"]) ? this : Optional.empty();
-        return predicate.apply(null, [this["value"]]) ? this : Optional.empty();
+        return predicate.apply(null, [this.get()]) ? this : Optional.empty();
       }
     }
   }, {
@@ -193,7 +210,7 @@ var Optional = function () {
         return Optional.empty();
       } else {
         //return Optional.ofNullable(mapper(this["value"]));
-        return Optional.ofNullable(mapper.apply(null, [this["value"]]));
+        return Optional.ofNullable(mapper.apply(null, [this.get()]));
       }
     }
 
@@ -207,7 +224,7 @@ var Optional = function () {
       if (!this.isPresent()) {
         return Optional.empty();
       } else {
-        var res = Objects.requireNonNull(mapper.apply(null, [this["value"]]), "Result is null");
+        var res = Objects.requireNonNull(mapper.apply(null, [this.get()]), "Result is null");
 
         if (res instanceof Optional) {
           return res;
@@ -219,14 +236,14 @@ var Optional = function () {
   }, {
     key: "orElse",
     value: function orElse(other) {
-      return !(this["value"] == null || this["value"] == undefined) ? this["value"] : other;
+      return !(this.get() == null || this.get() == undefined) ? this.get() : other;
     }
   }, {
     key: "orElseGet",
     value: function orElseGet(supplier) {
       Objects.requireNonNull(supplier, "Supplier is null");
       Objects.requireFunction(supplier, "Supplier is not a function");
-      return !(this["value"] == null || this["value"] == undefined) ? this["value"] : Objects.requireNonNull(supplier.apply(null, [this["value"]]), "Result is null");
+      return !(this.get() == null || this.get() == undefined) ? this.get() : Objects.requireNonNull(supplier.apply(null, [this.get()]), "Result is null");
     }
 
     /**
@@ -254,7 +271,7 @@ var Optional = function () {
       if (!(obj instanceof Optional)) {
         return false;
       }
-      return this["value"] == obj["value"];
+      return this.get() == obj.get();
     }
 
     /**
@@ -274,7 +291,7 @@ var Optional = function () {
   }, {
     key: "toString",
     value: function toString() {
-      return !(this["value"] == null || this["value"] == undefined) ? "Optional[" + this["value"] + "]" : "Optional.empty";
+      return !(this.get() == null || this.get() == undefined) ? "Optional[" + this.get() + "]" : "Optional.empty";
     }
   }], [{
     key: "empty",
@@ -296,30 +313,40 @@ var Optional = function () {
 }();
 
 var Result = function () {
+  /*
+    TODO: About privacy, see Symbol or WeakMap
+   */
+
   function Result(value, throwable) {
     babelHelpers.classCallCheck(this, Result);
 
-    this["value"] = value !== undefined ? value : null;
-    this["error"] = throwable !== undefined ? throwable : null;
-    //this[empty] = new Result();
+    var private_value = value !== undefined ? value : null;
+    var private_error = throwable !== undefined ? throwable : null;
+
+    this._value = function () {
+      return private_value;
+    };
+    this._error = function () {
+      return private_error;
+    };
   }
 
   babelHelpers.createClass(Result, [{
     key: "get",
     value: function get() {
-      if (this["value"] !== null || this["value"] !== undefined) {
-        return this["value"];
+      if (this._value() !== null || this._value() !== undefined) {
+        return this._value();
       }
-      if (this["error"] !== null || this["error"] !== undefined) {
-        throw this["error"];
+      if (this._error() !== null || this._error() !== undefined) {
+        throw this._error();
       }
       throw new NoSuchElementException("Empty result");
     }
   }, {
     key: "toOptional",
     value: function toOptional() {
-      if (this["value"] !== null || this["value"] !== undefined) {
-        return Optional.of(this["value"]);
+      if (this._value() !== null || this._value() !== undefined) {
+        return Optional.of(this._value());
       }
       return Optional.empty();
     }
@@ -350,15 +377,15 @@ var Result = function () {
   }, {
     key: "toOptionalError",
     value: function toOptionalError() {
-      if (this["error"] !== null || this["error"] !== undefined) {
-        return Optional.of(this["error"]);
+      if (this._error() !== null || this._error() !== undefined) {
+        return Optional.of(this._error());
       }
       return Optional.empty();
     }
   }, {
     key: "orElse",
     value: function orElse(other) {
-      return !(this["value"] == null || this["value"] == undefined) ? this["value"] : other;
+      return !(this._value() == null || this._value() == undefined) ? this._value() : other;
     }
 
     /**
@@ -372,12 +399,12 @@ var Result = function () {
     value: function orElseGet(supplier) {
       Objects.requireNonNull(supplier, "Supplier is null");
       Objects.requireFunction(supplier, "Supplier is not a function");
-      return !(this["value"] == null || this["value"] == undefined) ? this["value"] : Objects.requireNonNull(supplier.apply(null), "Result is null");
+      return !(this._value() == null || this._value() == undefined) ? this._value() : Objects.requireNonNull(supplier.apply(null), "Result is null");
     }
   }, {
     key: "isEmpty",
     value: function isEmpty() {
-      return (this["value"] == null || this["value"] == undefined) && (this["error"] == null || this["error"] == undefined);
+      return (this._value() == null || this._value() == undefined) && (this._error() == null || this._error() == undefined);
     }
 
     /**
@@ -388,15 +415,15 @@ var Result = function () {
   }, {
     key: "isError",
     value: function isError() {
-      return (this["value"] == null || this["value"] == undefined) && !(this["error"] == null || this["error"] == undefined);
+      return (this._value() == null || this._value() == undefined) && !(this._error() == null || this._error() == undefined);
     }
   }, {
     key: "isValue",
     value: function isValue(val) {
       if (val == undefined) {
-        return !(this["value"] == null || this["value"] == undefined) && (this["error"] == null || this["error"] == undefined);
+        return !(this._value() == null || this._value() == undefined) && (this._error() == null || this._error() == undefined);
       } else {
-        return this["value"] == val;
+        return this._value() == val;
       }
     }
   }, {
@@ -405,12 +432,12 @@ var Result = function () {
       Objects.requireNonNull(mapper, "Mapper is null");
       Objects.requireFunction(mapper, "Mapper is not a function");
 
-      if (this["value"] == null || this["value"] == undefined) {
+      if (this._value() == null || this._value() == undefined) {
         return this;
       }
 
       try {
-        return Result.ok(mapper.apply(null, [this["value"]]));
+        return Result.ok(mapper.apply(null, [this._value()]));
       } catch (e) {
         return Result.error(e);
       }
@@ -434,7 +461,7 @@ var Result = function () {
       }
       var res;
       try {
-        return Objects.requireNonNull(mapper.apply(null, [this["value"]]), "Result is null");
+        return Objects.requireNonNull(mapper.apply(null, [this._value()]), "Result is null");
       } catch (e) {
         return Result.error(e);
       }
@@ -459,9 +486,9 @@ var Result = function () {
     key: "either",
     value: function either(mapping, recover) {
       if (this.isError()) {
-        return recover.apply(null, [this["error"]]);
+        return recover.apply(null, [this._error()]);
       }
-      return mapping.apply(null, [this["value"]]);
+      return mapping.apply(null, [this._value()]);
     }
   }, {
     key: "filter",
@@ -470,16 +497,16 @@ var Result = function () {
       if (this.isEmpty() || this.isError()) {
         return this;
       } else {
-        return predicate.apply(null, [this["value"]]) ? this : Result.empty();
+        return predicate.apply(null, [this._value()]) ? this : Result.empty();
       }
     }
   }, {
     key: "reduce",
     value: function reduce(init, func) {
-      if (this["value"] == null || this["value"] == undefined) {
+      if (this._value() == null || this._value() == undefined) {
         return init;
       }
-      return func.apply(null, [init, this["value"]]);
+      return func.apply(null, [init, this._value()]);
     }
 
     /**
@@ -528,7 +555,7 @@ var Result = function () {
       if (!(obj instanceof Result)) {
         return false;
       }
-      return this["value"] == obj["value"] && this["error"] == obj["error"];
+      return this._value() == obj["value"] && this._error() == obj["error"];
     }
 
     /**
@@ -552,14 +579,14 @@ var Result = function () {
         return "Result.empty";
       }
       if (this.isError()) {
-        return "Result.error[" + this["error"] + "]";
+        return "Result.error[" + this._error() + "]";
       }
-      return "Result.value[" + this["value"] + "]";
+      return "Result.value[" + this._value() + "]";
     }
   }, {
     key: "destruct",
     value: function destruct() {
-      return [this["error"], this["value"]];
+      return [this._error(), this._value()];
     }
   }], [{
     key: "empty",

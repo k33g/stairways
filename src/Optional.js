@@ -14,10 +14,25 @@ import {Objects} from './Objects.js';
 export class Optional {
 
   constructor(value) {
-    this["value"] = value !== undefined ? value : null;
+    let private_value = value !== undefined ? value : null;
+
     if(value==null && value!==undefined) { // if undefined then null
       throw new NullPointerException("Null value")
     }
+
+    this.get = () => {
+      /*
+      if (private_value == null || undefined) {
+        throw new NoSuchElementException("No value present");
+      }
+      */
+      return private_value;
+    }
+    /*
+    this.getValue = () => { // with no Exception
+      return private_value;
+    }
+    */
   }
 
   static empty() {
@@ -32,22 +47,24 @@ export class Optional {
     return value == null || undefined ? Optional.empty() : Optional.of(value);
   }
 
+  /*
   get() {
     if (this["value"] == null || undefined) {
       throw new NoSuchElementException("No value present");
     }
     return this["value"];
   }
+  */
 
   isPresent() {
     if(arguments.length!=0) {
-      if(!(this["value"] == null || this["value"] == undefined)) {
+      if(!(this.get() == null || this.get() == undefined)) {
         let consumer = arguments[0]
         Objects.requireNonNull(consumer, "Consumer is null");
-        consumer(this["value"]);
+        consumer(this.get());
       }
     } else {
-      return !(this["value"] == null || this["value"] == undefined)
+      return !(this.get() == null || this.get() == undefined)
     }
 
   }
@@ -58,7 +75,7 @@ export class Optional {
       return this
     } else {
       //return predicate(this["value"]) ? this : Optional.empty();
-      return predicate.apply(null, [this["value"]]) ? this : Optional.empty();
+      return predicate.apply(null, [this.get()]) ? this : Optional.empty();
 
     }
   }
@@ -70,7 +87,7 @@ export class Optional {
       return Optional.empty();
     } else {
       //return Optional.ofNullable(mapper(this["value"]));
-      return Optional.ofNullable(mapper.apply(null, [this["value"]]));
+      return Optional.ofNullable(mapper.apply(null, [this.get()]));
     }
   }
 
@@ -81,7 +98,7 @@ export class Optional {
     if(!this.isPresent()) {
       return Optional.empty();
     } else {
-      let res = Objects.requireNonNull(mapper.apply(null, [this["value"]]), "Result is null");
+      let res = Objects.requireNonNull(mapper.apply(null, [this.get()]), "Result is null");
       
       if(res instanceof Optional) {
         return res;
@@ -93,16 +110,16 @@ export class Optional {
   }
 
   orElse(other) {
-    return !(this["value"] == null || this["value"] == undefined) ? this["value"] : other;
+    return !(this.get() == null || this.get() == undefined) ? this.get() : other;
   }
 
 
   orElseGet(supplier) {
     Objects.requireNonNull(supplier, "Supplier is null");
     Objects.requireFunction(supplier, "Supplier is not a function");
-    return !(this["value"] == null || this["value"] == undefined)
-      ? this["value"]
-      : Objects.requireNonNull(supplier.apply(null, [this["value"]]), "Result is null");
+    return !(this.get() == null || this.get() == undefined)
+      ? this.get()
+      : Objects.requireNonNull(supplier.apply(null, [this.get()]), "Result is null");
   }
 
   /**
@@ -125,7 +142,7 @@ export class Optional {
     if(!(obj instanceof Optional)) {
       return false;
     }
-    return this["value"] == obj["value"];
+    return this.get() == obj.get();
   }
 
   /**
@@ -140,8 +157,8 @@ export class Optional {
    * @override
    */
   toString() {
-    return !(this["value"] == null || this["value"] == undefined)
-      ? `Optional[${this["value"]}]` : "Optional.empty";
+    return !(this.get() == null || this.get() == undefined)
+      ? `Optional[${this.get()}]` : "Optional.empty";
   }
 
 }
