@@ -11,6 +11,7 @@ import {Objects} from './Objects';
 
 import {Optional} from './Optional';
 import {Result} from './Result';
+import {Identity} from './Identity';
 
 import {Version} from './Version';
 
@@ -22,5 +23,6 @@ export {
   Objects,
   Optional,
   Result,
+  Identity,
   Version
 };

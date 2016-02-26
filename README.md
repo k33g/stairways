@@ -18,6 +18,18 @@ Some functional types allows to easily handling errors and exceptions.
 
 *WIP*
 
+### Identity
+
+```javascript
+let compute = (a,b) => Identity.of(100)
+    .map(value => value + a)
+    .map(value => value * b)
+    .get();
+
+// Expected: 220
+console.log("Compute with Identity", compute(10, 2));
+```
+
 ### Play with Optional
 
 ```javascript

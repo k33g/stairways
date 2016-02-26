@@ -5,7 +5,7 @@
  * babel-cli ?
  */
 
-import {Optional, Objects,Result } from '../src/stairways';
+import {Optional, Objects,Result, Identity } from '../src/stairways';
 
 //rollup --input es6/stairways.js --output stairways.js
 
@@ -113,3 +113,10 @@ res1.either((val) => {
 },(err) => {
   console.log("Either KO", err)
 });
+
+let compute = (a,b) => Identity.of(100)
+    .map(value => value + a)
+    .map(value => value * b)
+    .get();
+
+console.log("Compute with Identity", compute(10, 2));

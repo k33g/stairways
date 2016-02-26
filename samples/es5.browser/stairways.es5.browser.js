@@ -599,6 +599,59 @@
   }();
 
   /**
+   * Created by k33g_org on 26/02/16.
+   */
+
+  /**
+   * Classs representing Identity type
+   * 
+   * example:
+   * let compute = (a,b) => Identity.of(100)
+   *      .map(value => value + a)
+   *      .map(value => value * b)
+   *      .get();
+   * 
+   */
+
+  var Identity = function () {
+    function Identity(value) {
+      babelHelpers.classCallCheck(this, Identity);
+
+      var private_value = value !== undefined ? value : null;
+      this.get = function () {
+        return private_value;
+      };
+    }
+
+    babelHelpers.createClass(Identity, [{
+      key: "bind",
+      value: function bind(callBack) {
+        return callBack(this.get());
+      }
+    }, {
+      key: "map",
+      value: function map(callBack) {
+        return new Identity(callBack(this.get()));
+      }
+    }, {
+      key: "toString",
+
+      /**
+       * @override
+       */
+      value: function toString() {
+        return "Identity.value[" + this.get() + "]";
+      }
+    }], [{
+      key: "of",
+      value: function of(value) {
+        return new Identity(value);
+      }
+    }]);
+    return Identity;
+  }();
+
+  /**
    * Created by k33g_org on 04/02/16.
    */
 
@@ -623,6 +676,7 @@
   exports.Objects = Objects;
   exports.Optional = Optional;
   exports.Result = Result;
+  exports.Identity = Identity;
   exports.Version = Version;
 
 }((this.stairways = {})));
