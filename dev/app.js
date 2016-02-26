@@ -5,7 +5,8 @@
  * babel-cli ?
  */
 
-import {Optional, Objects,Result } from '../src.es2015/stairways';
+import {Optional, Objects,Result } from '../src/stairways';
+
 //rollup --input es6/stairways.js --output stairways.js
 
 

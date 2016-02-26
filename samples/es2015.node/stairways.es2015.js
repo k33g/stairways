@@ -1,5 +1,6 @@
 /**
  * Created by k33g_org on 29/01/16.
+ *
  */
 
 class ExtendableException extends Error {
@@ -44,7 +45,6 @@ class Objects {
     }
     return obj;
   }
-
 
 }
 
@@ -127,8 +127,7 @@ class Optional {
       return Optional.empty();
     } else {
       let res = Objects.requireNonNull(mapper.apply(null, [this["value"]]), "Result is null");
-
-
+      
       if(res instanceof Optional) {
         return res;
       } else {
@@ -468,4 +467,14 @@ class Result {
 
 }
 
-export { ExtendableException, NullPointerException, NoSuchElementException, RuntimeException, Objects, Optional, Result };
+/**
+ * Created by k33g_org on 04/02/16.
+ */
+
+class Version {
+  static number() {
+    return [0,0,0];
+  }
+}
+
+export { ExtendableException, NullPointerException, NoSuchElementException, RuntimeException, Objects, Optional, Result, Version };

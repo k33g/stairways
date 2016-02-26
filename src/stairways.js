@@ -1,5 +1,5 @@
 /**
- * Created by k33g_org on 30/01/16.
+ * Alpha version
  */
 
 import {ExtendableException} from './ExtendableException';
@@ -12,6 +12,7 @@ import {Objects} from './Objects';
 import {Optional} from './Optional';
 import {Result} from './Result';
 
+import {Version} from './Version';
 
 export {
   ExtendableException,
@@ -20,5 +21,6 @@ export {
   RuntimeException,
   Objects,
   Optional,
-  Result
-}
+  Result,
+  Version
+};
